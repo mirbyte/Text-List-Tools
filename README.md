@@ -1,9 +1,9 @@
 # Password List Tools
 ## Usage
-Windows: just doubleclick.
+**Windows**: just doubleclick.
 
 
-Others: figure it out.
+**Others**: figure it out.
 
 
 

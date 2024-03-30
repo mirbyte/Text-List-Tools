@@ -1,4 +1,8 @@
 # Password List Tools
+### List Cleaner
+Lists all .txt files in the current directory and asks usser which one to process. Then it proceeds to remove all dots and
+
+
 ## Usage
 **Windows**: just doubleclick.
 

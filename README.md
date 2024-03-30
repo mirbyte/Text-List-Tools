@@ -1,6 +1,6 @@
 # Text List Tools
 ### List Cleaner
-Removes all numbers, dots and spaces while maintaining the row structure.
+Removes all numbers, dots and spaces while maintaining the row structure. The program will crash if there's no text files found.
 
 
 ## Usage

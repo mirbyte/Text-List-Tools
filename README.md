@@ -1,4 +1,4 @@
-# Password List Tools
+# Text List Tools
 ### List Cleaner
 Lists all .txt files in the current directory and prompts user which one to process. Then it proceeds to remove all numbers and dots.
 

@@ -1,6 +1,6 @@
 # Text List Tools
 ### List Cleaner
-Lists all .txt files in the current directory and prompts user which one to process. Then it proceeds to remove all numbers and dots.
+Removes all numbers, dots and spaces while maintaining the row structure.
 
 
 ## Usage

@@ -9,4 +9,4 @@
 
 
 
-<sub>_Educational purposes only. I am not responsible for any damages caused by my code or software._</sub>
+<sub>_Educational purposes only. Don't be a dick. I am not responsible for any damages caused by my code or software._</sub>

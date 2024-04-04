@@ -7,7 +7,7 @@ Removes all numbers, dots and spaces while maintaining the row structure. It wil
 **Windows**: just doubleclick.
 
 
-**Others**: figure it out.
+**Others**: idk figure it out.
 
 
 

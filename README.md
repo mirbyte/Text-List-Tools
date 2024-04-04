@@ -1,5 +1,5 @@
 # Text-List-Tools
-_**The script crashes if there's no .txt files in the current directory**_
+_The script crashes if there's no .txt files found in the current directory_
 ## List Cleaner
 Removes all numbers, dots and spaces while maintaining the row structure.
 

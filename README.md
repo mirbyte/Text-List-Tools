@@ -22,7 +22,7 @@ Removes all numbers, dots and spaces while maintaining the row structure.
 
 
 
-**Open source code used in this project:**
+### Open source code used in this project:
 https://github.com/tqdm/tqdm
 
 <sub>_Educational purposes only. Don't be a dick. I am not responsible for any damages caused directly or indirectly by my code._</sub>

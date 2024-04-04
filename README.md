@@ -1,9 +1,9 @@
 # Text-List-Tools _IN PROGRESS_
-_The script crashes if there's no .txt files found in the current directory when selecting modify existing file_
+_The script crashes if there's no .txt files found in the current directory when selecting "modify existing file"_
 
 
 ## Passwd List Generator
-Choose between numbers, characters and symbols with a length parameter.
+Choose between numbers, characters and symbols with a length parameter. It tries to create every possible combination.
 
 
 

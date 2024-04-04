@@ -14,7 +14,7 @@ Removes all numbers, dots and spaces while maintaining the row structure.
 
 
 
-### Usage
+## Usage
 **Windows**: just doubleclick.
 
 

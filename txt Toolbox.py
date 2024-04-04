@@ -55,7 +55,7 @@ def menu():
 ############
 def menu2():
     menu2_items = [
-        "Generate new txt list",
+        "",
         "",
         "Option 3",
         "Option 4"

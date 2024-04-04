@@ -3,6 +3,10 @@
 Removes all numbers, dots and spaces while maintaining the row structure. It will crash if there's no text files found.
 
 
+### Passwd List Generator
+Choose between numbers, characters and symbols with a length parameter.
+
+
 ## Usage
 **Windows**: just doubleclick.
 

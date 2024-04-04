@@ -1,11 +1,17 @@
 # Text-List-Tools
 _The script crashes if there's no .txt files found in the current directory_
-## List Cleaner
-Removes all numbers, dots and spaces while maintaining the row structure.
 
 
 ## Passwd List Generator
 Choose between numbers, characters and symbols with a length parameter.
+
+
+
+## List Cleaner
+Removes all numbers, dots and spaces while maintaining the row structure.
+
+
+
 
 
 ## Usage

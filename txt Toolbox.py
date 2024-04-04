@@ -35,7 +35,7 @@ def banner():
                 github.com/mirbyte
 		
         
-        Algorithmic list generator & editor
+        Algorithmic list generator & modifier
       
 """ + END)
 

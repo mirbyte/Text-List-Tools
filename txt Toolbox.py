@@ -26,7 +26,7 @@ def clear():
 
 def banner():
     clear()
-    print(PURPLE + """
+    print(ORANGE + """
  _        _      _              _ _               
 | |_ _  _| |_   | |_ ___   ___ | | |__   _____  __
 | __\ \/ / __|  | __/ _ \ / _ \| | '_ \ / _ \ \/ /   
@@ -142,16 +142,16 @@ elif inp == 2:
 
 
 elif inp == 3:
-
+    print("")
     
 elif inp == 4:
- 
+    print("")
 
 elif inp == 5:
-
+    print("")
 
 if inp == 6:
-
+    print("")
 
 elif inp == 0:
     input("Press Enter to exit...")

@@ -1,4 +1,4 @@
-# Text-List-Tools
+# Text-List-Tools _IN PROGRESS_
 _The script crashes if there's no .txt files found in the current directory_
 
 

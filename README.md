@@ -15,14 +15,14 @@ Removes all numbers, dots and spaces while maintaining the row structure.
 
 
 ## Usage
-**Windows**: just doubleclick.
+**Windows**: just doubleclick the py file.
 
 
 **Others**: idk figure it out.
 
 
 
-### Open source code utilized in this project:
+### Open source projects utilized:
 https://github.com/tqdm/tqdm (progress bar)
 
 <sub>_Educational purposes only. Don't be a dick. I am not responsible for any damages caused directly or indirectly by my code._</sub>

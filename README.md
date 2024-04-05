@@ -15,7 +15,7 @@ Removes all numbers, dots and spaces while maintaining the row structure.
 
 
 ## Usage
-**Windows**: just doubleclick the py file.
+**Windows**: just doubleclick the .py file.
 
 
 **Others**: idk figure it out.

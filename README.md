@@ -25,4 +25,4 @@ Removes all numbers, dots and spaces while maintaining the row structure.
 ### Open source projects utilized:
 https://github.com/tqdm/tqdm (progress bar)
 
-<sub>_Educational purposes only. Don't be a dick. I am not responsible for any damages caused directly or indirectly by my code._</sub>
+<sub>_Educational purposes only. Don't be a dick. I take no responsibility for any damages caused directly or indirectly by my code._</sub>

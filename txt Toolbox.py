@@ -135,11 +135,11 @@ elif inp == 2:
     print(" Select Option: ")
     inp2 = int(input(" > "))
     
-    if inp2 == 1:
+    if inp2 == 1: # List Cleaner
         input("option 1 selected")
 
     
-    if inp2 == 2:
+    if inp2 == 2: # Duplicate Remover
         input("option 2 selected")
     
     

@@ -54,8 +54,8 @@ def menu():
 ############
 def menu2():
     menu2_items = [
-        "",
-        "",
+        "List Cleaner",
+        "List Duplicates Remover",
         "Option 3",
         "Option 4"
     ]
@@ -135,22 +135,24 @@ elif inp == 2:
     print(" Select Option: ")
     inp2 = int(input(" > "))
     
+    if inp2 == 1:
+        input("option 1 selected")
+
+    
+    if inp2 == 2:
+        input("option 2 selected")
+    
+    
+    
+    input("Press Enter to exit...")
+    exit()
+    
     
     
     
 
 
-elif inp == 3:
-    print("")
-    
-elif inp == 4:
-    print("")
 
-elif inp == 5:
-    print("")
-
-if inp == 6:
-    print("")
 
 elif inp == 0:
     input("Press Enter to exit...")

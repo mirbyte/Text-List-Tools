@@ -11,6 +11,9 @@ Choose between numbers, characters and symbols with a length parameter. It tries
 Removes all numbers, dots and spaces while maintaining the row structure.
 
 
+## Duplicate Remover
+
+
 
 
 

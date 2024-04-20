@@ -12,7 +12,11 @@ Removes all numbers, dots and spaces while maintaining the row structure.
 
 
 ## Duplicate Remover
+-
 
+
+## To do List
+-add exit[0] to all menus
 
 
 

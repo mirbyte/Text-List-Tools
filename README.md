@@ -16,7 +16,8 @@ Removes all numbers, dots and spaces while maintaining the row structure.
 
 
 ## To do List
--add exit[0] to all menus
+- missing functions
+- exit[0] to all menus
 
 
 

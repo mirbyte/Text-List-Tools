@@ -17,6 +17,7 @@ Removes all numbers, dots and spaces while maintaining the row structure.
 
 ### To do List
 - missing functions
+- add options to list cleaner
 - exit[0] to all menus (goes back to previous menu)
 
 

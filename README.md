@@ -8,7 +8,7 @@ Choose between numbers, characters and symbols with a length parameter. It tries
 
 
 ## List Cleaner
-Removes all numbers, dots and spaces while maintaining the row structure.
+Removes all numbers, dots and spaces while maintaining the row structure. options coming in the future
 
 
 ## Duplicate Remover

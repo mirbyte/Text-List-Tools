@@ -12,7 +12,7 @@ Removes all numbers, dots and spaces while maintaining the row structure. option
 
 
 ## Duplicate Remover
-...
+Removes duplicate rows while maintaining the row structure. *doesnt seem to recognise if the row ends to a space*
 
 
 ### To do List

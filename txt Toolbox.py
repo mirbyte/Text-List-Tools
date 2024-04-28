@@ -136,13 +136,16 @@ elif inp == 2:
     inp2 = int(input(" > "))
     
     if inp2 == 1: # List Cleaner
+        clear()
         input("option 1 selected")
 
     
     if inp2 == 2: # Duplicate Remover
+        clear()
         input("option 2 selected")
+        
     
-    
+
     
     input("Press Enter to exit...")
     exit()

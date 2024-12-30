@@ -18,7 +18,7 @@ Removes duplicate rows while maintaining the row structure. If the row ends to a
 ### To do List
 - missing functions
 - add options to list cleaner
-- exit[0] to all menus (goes back to previous menu)
+- exit[0] to all menus (return)
 
 
 

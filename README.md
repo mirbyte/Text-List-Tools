@@ -1,5 +1,5 @@
 # Text-List-Toolbox _IN PROGRESS_
-_The script might crash if there's no .txt files found in the current directory when selecting "modify existing file"_ option.
+_The script might crash/quit instantly if there's no .txt files found in the current directory when selecting "modify existing file" option_.
 
 
 ## Passwd List Generator

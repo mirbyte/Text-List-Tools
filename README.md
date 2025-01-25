@@ -1,7 +1,7 @@
-![Size](https://img.shields.io/github/repo-size/mirbyte/Text-List-Tools?color=941600&label=Size)
-![Created](https://badges.pufler.dev/created/mirbyte/Text-List-Tools?color=941600)
-![LastCommit](https://img.shields.io/github/last-commit/mirbyte/Text-List-Tools?color=941600&label=Updated)
-![License](https://img.shields.io/github/license/mirbyte/Text-List-Tools?color=941600)
+![Size](https://img.shields.io/github/repo-size/mirbyte/Text-List-Tools?color=c41d00&label=Size)
+![Created](https://badges.pufler.dev/created/mirbyte/Text-List-Tools?color=c41d00)
+![LastCommit](https://img.shields.io/github/last-commit/mirbyte/Text-List-Tools?color=c41d00&label=Updated)
+![License](https://img.shields.io/github/license/mirbyte/Text-List-Tools?color=c41d00)
 
 # Text-List-Toolbox _IN PROGRESS_
 _The script might crash/quit instantly if there's no .txt files found in the current directory when selecting "modify existing file" option_.

@@ -27,6 +27,10 @@ Removes duplicate rows while maintaining the row structure. If the row ends to a
 
 
 
+![ttss](https://github.com/user-attachments/assets/a7ccc272-e777-4aee-9bea-eb1eb1d0cebf)
+
+
+
 
 ## Usage
 **Windows**: just doubleclick the .py file.

@@ -2,13 +2,12 @@ import os
 import sys
 import time
 from colorama import Fore, Style
+import shutil
 
 # list generator
 from tqdm import tqdm
 import itertools
 import string
-
-
 
 RED = Fore.RED
 ORANGE = Fore.LIGHTRED_EX
@@ -19,6 +18,8 @@ WHITE = Fore.WHITE
 CYAN = Fore.CYAN
 PURPLE = Fore.MAGENTA
 END = Style.RESET_ALL
+
+
 
 def clear():
     os.system("cls" if os.name == "nt" else "clear")
@@ -34,9 +35,11 @@ def banner():
                 github.com/mirbyte
 		
         
-        Algorithmic list generator & modifier
+
+     Algorithmic .txt list generator & modifier
       
 """ + END)
+
 
 
 ############
@@ -56,7 +59,7 @@ def menu2():
     menu2_items = [
         "List Cleaner",
         "List Duplicates Remover",
-        "Option 3",
+        "List Combiner",
         "Option 4"
     ]
     for index, item in enumerate(menu2_items, start=1):
@@ -117,12 +120,8 @@ def list_cleaner():
     input("Press Enter to close...")
 
 
-
-## end of def list cleaner
-
 ############
 def remove_duplicates():
-
     txt_files = [f for f in os.listdir() if f.endswith(".txt")]
 
     if not txt_files:
@@ -161,8 +160,7 @@ def remove_duplicates():
         print(f"Error: Encountered an issue while processing {filename}: {e}")
         return
 
-
-    with open(new_filename, "w", encoding="utf-8") as file:  # specify UTF-8 encoding
+    with open(new_filename, "w", encoding="utf-8") as file:
         file.writelines(password + "\n" for password in unique_passwords)
 
     duplicates_removed = original_count - len(unique_passwords)
@@ -172,16 +170,96 @@ def remove_duplicates():
     print("")
     input("Press Enter to close...")
 
-## end of def duplicate remover
+
+############ COMBINER #############
+def combine_lists():
+    # Get .txt files in the current dir
+    txt_files = [f for f in os.listdir() if f.endswith(".txt")]
+
+    if not txt_files:
+        print("No .txt files found in the current directory.")
+        return
+
+    selected_files = []
+    while True:
+        print("\nAvailable text files:")
+        for i, filename in enumerate(txt_files, start=1):
+            selected = "✓" if filename in selected_files else " "
+            print(f" [{selected}] {i}  {filename}")
+        
+        if selected_files:
+            break
+            
+        print("\nSelect files to combine (enter numbers separated by spaces)")
+        print("Enter 'all' to select all files")
+        choice = input("> ").lower()
+        
+        if choice == 'all':
+            selected_files = txt_files.copy()
+            break
+        else:
+            try:
+                choices = [int(c) for c in choice.split()]
+                for c in choices:
+                    filename = txt_files[c - 1]
+                    if filename not in selected_files:
+                        selected_files.append(filename)
+                break
+            except (ValueError, IndexError):
+                print("Invalid selection. Please enter valid numbers.")
+
+    output_filename = input("\nEnter output filename (without extension): ") + ".txt"
+    
+    # Add file existence check
+    if os.path.exists(output_filename):
+        overwrite = input(f"File {output_filename} already exists. Overwrite? (y/n): ").lower()
+        if overwrite != 'y':
+            print("Operation cancelled.")
+            return
+
+    try:
+        # Process files in chunks to handle very large files
+        chunk_size = 100000  # Process 100k lines at a time
+        unique_lines = set()
+        total_lines_processed = 0
+        
+        print("\nProcessing files...")
+        for filename in tqdm(selected_files, desc="Files"):
+            with open(filename, "r", encoding="utf-8", errors="ignore") as infile:
+                for line in infile:
+                    stripped_line = line.strip()
+                    # Skip empty lines
+                    if stripped_line:
+                        unique_lines.add(stripped_line)
+                    
+                    # Process in chunks to avoid memory issues
+                    if len(unique_lines) >= chunk_size:
+                        with open(output_filename, "a" if total_lines_processed > 0 else "w", encoding="utf-8") as outfile:
+                            outfile.writelines(line + "\n" for line in unique_lines)
+                        total_lines_processed += len(unique_lines)
+                        unique_lines.clear()
+        
+        # Write any remaining lines
+        if unique_lines:
+            with open(output_filename, "a" if total_lines_processed > 0 else "w", encoding="utf-8") as outfile:
+                outfile.writelines(line + "\n" for line in unique_lines)
+            total_lines_processed += len(unique_lines)
+        
+        print(f"\nSuccessfully combined {len(selected_files)} files into {output_filename}")
+        print(f"Duplicates were automatically removed.")
+    except Exception as e:
+        print(f"\nError occurred while combining files: {e}")
+    
+    input("\nPress Enter to exit...")
+    sys.exit()
+
 
 ############
-
 banner()
 menu()
 
 print(" Select Option: ")
 inp = int(input(" > "))
-
 
 
 #############GENERATOR##
@@ -223,13 +301,10 @@ if inp == 1:
             file.write("".join(combo) + "\n")
 
     print("saved to combinations.txt")
-
     input("Press Enter to close...")
 
 
 ########################
-
- 
 elif inp == 2:
     clear()
     banner()
@@ -243,25 +318,20 @@ elif inp == 2:
         banner()
         list_cleaner()
 
-    
-    if inp2 == 2: # Duplicate Remover
+    elif inp2 == 2: # Duplicate Remover
         clear()
         banner()
         remove_duplicates()
         
-    
+    elif inp2 == 3:  # List Combiner
+        clear()
+        banner()
+        combine_lists()
 
-    
     input("Press Enter to exit...")
     exit()
     
-    
-    
-    
-
-
-
-
 elif inp == 0:
     input("Press Enter to exit...")
     exit()
+

@@ -20,10 +20,6 @@ Removes all numbers, dots and spaces while maintaining the row structure. option
 Removes duplicate rows while maintaining the row structure. If the row ends to a space this removes it for some reason, I'll take a look later.
 
 
-### To do List
-- missing functions
-- add options to list cleaner
-- exit[0] to all menus (return)
 
 
 
@@ -38,6 +34,11 @@ Removes duplicate rows while maintaining the row structure. If the row ends to a
 
 **Others**: idk figure it out.
 
+
+## Changelog
+**30.3.2025**
+- over 70% faster processing across all generating logics compared to previous versions!
+- changelog started
 
 
 ### Open source projects utilized:

@@ -3,11 +3,13 @@ import sys
 import time
 from colorama import Fore, Style
 import shutil
-
-# list generator
+import psutil
+import multiprocessing
 from tqdm import tqdm
 import itertools
 import string
+import numpy as np
+
 
 RED = Fore.RED
 ORANGE = Fore.LIGHTRED_EX
@@ -24,9 +26,10 @@ END = Style.RESET_ALL
 def clear():
     os.system("cls" if os.name == "nt" else "clear")
 
+
 def banner():
     clear()
-    print(ORANGE + """
+    print(ORANGE + r"""
  _        _      _              _ _               
 | |_ _  _| |_   | |_ ___   ___ | | |__   _____  __
 | __\ \/ / __|  | __/ _ \ / _ \| | '_ \ / _ \ \/ /   
@@ -34,12 +37,10 @@ def banner():
 \___|_/\_\\___|  \__|\___/ \___/|_|_.__/ \___/_/\_\  
                 github.com/mirbyte
 		
-        
 
      Algorithmic .txt list generator & modifier
       
 """ + END)
-
 
 
 ############
@@ -117,7 +118,8 @@ def list_cleaner():
 
     print(f"New file saved as {new_filename}")
     print("")
-    input("Press Enter to close...")
+    input("Press Enter to continue...")
+    # back to the menu
 
 
 ############
@@ -168,12 +170,12 @@ def remove_duplicates():
     print(f"New file saved as {new_filename}")
     print(f"Found and removed {duplicates_removed} duplicates.")
     print("")
-    input("Press Enter to close...")
+    input("Press Enter to continue...")
+    # back to the menu
 
 
 ############ COMBINER #############
 def combine_lists():
-    # Get .txt files in the current dir
     txt_files = [f for f in os.listdir() if f.endswith(".txt")]
 
     if not txt_files:
@@ -183,7 +185,7 @@ def combine_lists():
     selected_files = []
     while True:
         print("\nAvailable text files:")
-        for i, filename in enumerate(txt_files, start=1):
+        for i, filename in enumerate(tqdm(txt_files), start=1):
             selected = "✓" if filename in selected_files else " "
             print(f" [{selected}] {i}  {filename}")
         
@@ -210,7 +212,6 @@ def combine_lists():
 
     output_filename = input("\nEnter output filename (without extension): ") + ".txt"
     
-    # Add file existence check
     if os.path.exists(output_filename):
         overwrite = input(f"File {output_filename} already exists. Overwrite? (y/n): ").lower()
         if overwrite != 'y':
@@ -218,26 +219,32 @@ def combine_lists():
             return
 
     try:
-        # Process files in chunks to handle very large files
         chunk_size = 100000  # Process 100k lines at a time
         unique_lines = set()
         total_lines_processed = 0
+        total_lines_read = 0
         
         print("\nProcessing files...")
         for filename in tqdm(selected_files, desc="Files"):
-            with open(filename, "r", encoding="utf-8", errors="ignore") as infile:
-                for line in infile:
-                    stripped_line = line.strip()
-                    # Skip empty lines
-                    if stripped_line:
-                        unique_lines.add(stripped_line)
-                    
-                    # Process in chunks to avoid memory issues
-                    if len(unique_lines) >= chunk_size:
-                        with open(output_filename, "a" if total_lines_processed > 0 else "w", encoding="utf-8") as outfile:
-                            outfile.writelines(line + "\n" for line in unique_lines)
-                        total_lines_processed += len(unique_lines)
-                        unique_lines.clear()
+            try:
+                with open(filename, "r", encoding="utf-8", errors="ignore") as infile:
+                    for line in infile:
+                        total_lines_read += 1
+                        stripped_line = line.strip()
+                        # Skip empty lines
+                        if stripped_line:
+                            unique_lines.add(stripped_line)
+                        
+                        # Process in chunks to avoid memory issues
+                        if len(unique_lines) >= chunk_size:
+                            with open(output_filename, "a" if total_lines_processed > 0 else "w", encoding="utf-8") as outfile:
+                                outfile.writelines(line + "\n" for line in unique_lines)
+                            total_lines_processed += len(unique_lines)
+                            unique_lines.clear()
+            except Exception as e:
+                print(f"\nWarning: Error processing file {filename}: {e}")
+                print("Continuing with other files...")
+                continue
         
         # Write any remaining lines
         if unique_lines:
@@ -246,12 +253,15 @@ def combine_lists():
             total_lines_processed += len(unique_lines)
         
         print(f"\nSuccessfully combined {len(selected_files)} files into {output_filename}")
-        print(f"Duplicates were automatically removed.")
+        unique_count = total_lines_processed
+        print(f"Read {total_lines_read:,} lines, wrote {unique_count:,} unique lines") 
+        print(f"Removed {total_lines_read - unique_count:,} duplicates")
     except Exception as e:
         print(f"\nError occurred while combining files: {e}")
-    
-    input("\nPress Enter to exit...")
-    sys.exit()
+        return
+
+    input("\nPress Enter to continue...")
+    return # sys exit
 
 
 ############
@@ -269,39 +279,170 @@ if inp == 1:
 
     def get_char_set():
         while True:
-            print("  1  numbers only")
-            print("  2  numbers + lowercase")
-            print("  3  numbers + all letters")
-            print("  4  numbers + all letters + special characters")
+            print(" [1] numbers only")
+            print(" [2] lowercase only")
+            print(" [3] numbers + lowercase")
+            print(" [4] numbers + all letters")
+            print(" [5] numbers + all letters + special characters")
+            print(" [6] custom character set")
             print("")
             choice = input("Choose the character set: ")
-            if choice in ("1", "2", "3", "4"):
+            if choice in ("1", "2", "3", "4", "5", "6"):
                 if choice == "1":
                     return string.digits
                 elif choice == "2":
-                    return string.digits + string.ascii_lowercase
+                    return string.ascii_lowercase
                 elif choice == "3":
+                    return string.digits + string.ascii_lowercase
+                elif choice == "4":
                     return string.digits + string.ascii_letters
-                else:  # Choice 4
+                elif choice == "5":
                     return string.digits + string.ascii_letters + string.punctuation
+                else:  # Choice 6
+                    custom_chars = input("Enter your custom character set: ")
+                    if not custom_chars:
+                        print("Character set cannot be empty")
+                        continue
+                    if len(set(custom_chars)) < 3:
+                        print("Warning: Very small character set")
+                    return ''.join(sorted(set(custom_chars)))
             else:
-                print("Invalid choice. Please enter 1, 2, 3, or 4.")
+                print("Invalid choice. Please enter 1, 2, 3, 4, 5, or 6.")
 
     chars = get_char_set()
 
-    length = int(input("Length of combinations? "))
+    # In the generator section:
+    length = 0
+    while length <= 0:
+        try:
+            length = int(input("Length? "))
+            if length <= 0:
+                print("Length must be a positive number.")
+        except ValueError:
+            print("Please enter a valid number.")
+    
+    # warning for large combinations
     total_combinations = len(chars) ** length
+    if total_combinations > 100000000:
+        print(f"Warning: This will generate {total_combinations:,} combinations.")
+        confirm = input("This may take a long time and use a lot of disk space. Continue? (y/n): ").lower()
+        if confirm != 'y':
+            print("Operation cancelled.")
+            input("Press Enter to close...")
+            exit()
 
-    with open("combinations.txt", "w") as file:
-        for i, combo in tqdm(
-            enumerate(itertools.product(chars, repeat=length)),
-            total=total_combinations,
-            desc="Progress"
-        ):
-            file.write("".join(combo) + "\n")
+    # Fix the numeric generation case by removing the incorrect return
+    def get_safe_chunk_size(current_chunk_size, length, chars):
+        """Dynamically adjust chunk size based on available RAM"""
+        mem = psutil.virtual_memory()
+        safe_threshold = 0.7  # Use max 70% of available RAM
+        
+        # Calculate memory needed for one chunk (approximate)
+        bytes_per_item = length * 4  # Rough estimate (4 bytes per char)
+        memory_needed = current_chunk_size * bytes_per_item
+        
+        # Reduce chunk size if needed
+        while memory_needed > (mem.available * safe_threshold):
+            current_chunk_size = current_chunk_size // 2
+            memory_needed = current_chunk_size * bytes_per_item
+            if current_chunk_size < 1000:  # Minimum chunk size
+                raise MemoryError("Not enough memory to proceed safely")
+        
+        return current_chunk_size
 
-    print("saved to combinations.txt")
-    input("Press Enter to close...")
+    # Handle different character set options
+    if chars == string.digits:
+        chunk_size = get_safe_chunk_size(1_000_000, length, chars)
+        filename_prefix = "numbers_only"
+        output_filename = f"{filename_prefix}_len{length}.txt"
+        
+        if os.path.exists(output_filename):
+            overwrite = input(f"File {output_filename} already exists. Overwrite? (y/n): ").lower()
+            if overwrite != 'y':
+                print("Operation cancelled.")
+                input("Press Enter to close...")
+                exit()
+
+        # Generate all possible number combinations
+        with open(output_filename, "wb") as file:
+            total_numbers = 10**length
+            chunk_size = min(chunk_size, total_numbers)
+            
+            for start in tqdm(range(0, total_numbers, chunk_size), 
+                            desc="Generating", 
+                            unit="chunk"):
+                end = min(start + chunk_size, total_numbers)
+                chunk = [f"{num:0{length}d}\n" for num in range(start, end)]
+                file.write(b''.join(s.encode('utf-8') for s in chunk))
+        
+        print(f"Saved to {output_filename}")
+        input("Press Enter to close...")
+        exit()
+    
+    else: # For mixed character sets (options 2-6)
+        try:
+            # filename prefix
+            if chars == string.ascii_lowercase:
+                filename_prefix = "lowercase_only"
+            elif chars == string.digits + string.ascii_lowercase:
+                filename_prefix = "numbers_lowercase"
+            elif chars == string.digits + string.ascii_letters:
+                filename_prefix = "numbers_allletters"
+            elif chars == string.digits + string.ascii_letters + string.punctuation:
+                filename_prefix = "all_chars"
+            else:
+                filename_prefix = "custom_chars"
+            
+            output_filename = f"{filename_prefix}_len{length}.txt"
+            
+            if os.path.exists(output_filename):
+                overwrite = input(f"File {output_filename} already exists. Overwrite? (y/n): ").lower()
+                if overwrite != 'y':
+                    print("Operation cancelled.")
+                    input("Press Enter to close...")
+                    exit()
+
+            chunk_size = get_safe_chunk_size(100_000, length, chars)
+            
+            # Generate combinations using a more reliable approach
+            with open(output_filename, "wb") as file:
+                char_list = list(chars)
+                total_combinations = len(chars) ** length
+                
+                if total_combinations == 0:
+                    raise ValueError("No combinations possible with current character set")
+                
+                pbar = tqdm(total=total_combinations, desc="Generating")
+                
+                # Use a simpler chunking approach
+                product_iter = itertools.product(char_list, repeat=length)
+                while True:
+                    chunk = []
+                    # Get next chunk_size items
+                    for _ in range(chunk_size):
+                        try:
+                            combo = next(product_iter)
+                            chunk.append(''.join(combo) + '\n')
+                        except StopIteration:
+                            break
+                    
+                    if not chunk: # No more combinations
+                        break
+                        
+                    file.write(b''.join(s.encode('utf-8') for s in chunk))
+                    pbar.update(len(chunk))
+                    file.flush() # Ensure data is written to disk
+                
+                pbar.close()
+            
+            print(f"Saved to {output_filename}")
+            input("Press Enter to close...")
+            exit()
+            
+        except Exception as e:
+            print(f"Error during generation: {str(e)}")
+            input("Press Enter to close...")
+            exit()
 
 
 ########################
@@ -323,15 +464,31 @@ elif inp == 2:
         banner()
         remove_duplicates()
         
-    elif inp2 == 3:  # List Combiner
+    elif inp2 == 3: # List Combiner
         clear()
         banner()
         combine_lists()
-
-    input("Press Enter to exit...")
-    exit()
     
-elif inp == 0:
-    input("Press Enter to exit...")
-    exit()
+    elif inp2 == 0: # Exit
+        print("Exiting...")
+        exit()
+    
+    else: # Invalid option
+        print("Invalid option selected.")
+        input("Press Enter to return to main menu...")
 
+
+
+    clear()
+    banner()
+    menu()
+    print(" Select Option: ")
+    inp = int(input(" > "))
+    # This will loop back to the main menu processing
+
+
+
+
+if __name__ == "__main__":
+    main()
+  

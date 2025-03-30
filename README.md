@@ -4,7 +4,7 @@
 ![License](https://img.shields.io/github/license/mirbyte/Text-List-Tools?color=c41d00)
 
 # Text-List-Toolbox
-_The script might crash/quit instantly if there's no .txt files found in the current directory when selecting "modify existing file" option_. Tested on windows only. Still in development but it works as far as my testing goes. If you found this useful, please drop a ⭐-it means a lot!
+_The script might crash/quit instantly if there's no .txt files found in the current directory when selecting "modify existing file" option_. Tested on windows only. Still in development but it works as far as my testing goes. If you found this useful, please drop a ⭐- it means a lot!
 
 ## Passwd List Generator
 Choose between numbers, characters and symbols with a length parameter. It tries to create every possible combination.

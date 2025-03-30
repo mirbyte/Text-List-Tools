@@ -20,7 +20,7 @@ Removes all numbers, dots and spaces while maintaining the row structure. option
 Removes duplicate rows while maintaining the row structure. If the row ends to a space this removes it for some reason, I'll take a look later.
 
 
-
+<br>
 
 ![ttss](https://github.com/user-attachments/assets/a7ccc272-e777-4aee-9bea-eb1eb1d0cebf)
 

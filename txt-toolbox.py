@@ -13,7 +13,7 @@ import numpy as np
 
 
 # This script is still in development, use at your own risk
-# github.com/mirbyte
+# contact details can be found at github.com/mirbyte
 
 
 

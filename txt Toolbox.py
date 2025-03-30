@@ -11,6 +11,10 @@ import string
 import numpy as np
 
 
+# This script is still in development, use at your own risk
+# github.com/mirbyte
+
+
 RED = Fore.RED
 ORANGE = Fore.LIGHTRED_EX
 BLUE = Fore.BLUE

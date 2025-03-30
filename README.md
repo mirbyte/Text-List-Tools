@@ -3,8 +3,8 @@
 ![LastCommit](https://img.shields.io/github/last-commit/mirbyte/Text-List-Tools?color=c41d00&label=Updated)
 ![License](https://img.shields.io/github/license/mirbyte/Text-List-Tools?color=c41d00)
 
-# Text-List-Toolbox _IN PROGRESS_
-_The script might crash/quit instantly if there's no .txt files found in the current directory when selecting "modify existing file" option_. Tested on windows only.
+# Text-List-Toolbox
+_The script might crash/quit instantly if there's no .txt files found in the current directory when selecting "modify existing file" option_. Tested on windows only. Still an early version.
 
 
 ## Passwd List Generator

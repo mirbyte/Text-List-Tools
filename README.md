@@ -35,7 +35,7 @@ Removes duplicate rows while maintaining the row structure. If the row ends to a
 
 ## Changelog
 **30.3.2025**
-- Almost complete logic refactoring. *Over 70% faster* processing across all generating processes compared to previous versions!
+- Almost complete logic refactoring. *Over 70% faster* across all generating processes compared to previous versions!
 - Changelog started
 
 
